@@ -45,4 +45,12 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public static function getData()
+    {
+        return (object)[
+            'name' => 'Francis Ferrer',
+            'email' => 'fmferrer@mirdc.dost.gov.ph',
+        ];
+    }
 }
