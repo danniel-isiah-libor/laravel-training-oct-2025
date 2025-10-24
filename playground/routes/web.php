@@ -16,3 +16,48 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/user', function () {
+    //return '<h1 style="color: red"> User Page </>';
+    //return '<script>alert("Welcome to User Page")</script>';
+    //return [2,1,4];
+    return "First Name" . " " . "Last Name";
+});
+
+// user/profile
+// user/settings
+// user/dashboard
+//  user/....
+
+//Prefix or grouping of routes
+Route::prefix('/customer')->name('user.')->group(function () {
+    Route::get('/profile/{id?}', function ($id = null) {
+    return 'User Profile Page for User ID:'.$id; //Dynamic Parameters with Fallback Value
+})->name('profile');
+
+    Route::get('/dashboard', function () {
+        return 'User Dashboard Page';
+    })->name('dashboard');
+
+    Route::get('/setting', function () {
+        return 'User Settings Page';
+    })->name('setting');
+});
+
+//If duplicate endpoints are there, then the first one will be executed first as per the order of routes defined in this file or sequentially.
+Route::redirect('/from', '/to'); //Redirect with no Alias Name
+Route::get('/to', function () {
+    return redirect()->route('user.profile'); //Redirect with Alias Name
+});
+
+Route::fallback(function () {
+    return 'The page you are looking for does not exist. <a href="/">Go to Home Page</a>'; //default fallback route or 404 page
+});
+
+//Dynamic Parameters in Routes
+Route::get('/user/{id}', function ($id) {
+    return 'user'.$id;
+});
+
+
+
