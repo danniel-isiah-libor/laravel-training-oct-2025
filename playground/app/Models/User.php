@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -42,7 +41,21 @@ class User extends Authenticatable
     {
         return [
             'email_verified_at' => 'datetime',
-            'password' => 'hashed',
+            'password'          => 'hashed',
+        ];
+    }
+
+    public static function getData()
+    {
+        return (object) [
+            [
+                'name'  => 'John Doe',
+                'email' => 'email@example.com',
+            ],
+            [
+                'name'  => 'Jane Smith',
+                'email' => 'asdasd',
+            ],
         ];
     }
 }
