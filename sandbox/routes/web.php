@@ -1,7 +1,8 @@
 <?php
 
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\CompanyController;
 use Illuminate\Support\Facades\Route;
-use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/', function () {
     return view('welcome');
@@ -36,9 +37,7 @@ Route::get('/', function () {
             return "User Dashboard Page";
         })->name('dashboard');
 
-        Route::get('/profile/{id?}', function ($id = null) {
-            return "User Profile Page for User ID: ".$id;
-        })->name('profile');
+        Route::get('/profile/{id?}', [UserController::class, 'profile'])->name('profile');
         
         Route::get('/setting', function () {
             return "User Setting Page";
@@ -55,3 +54,22 @@ Route::get('/', function () {
     Route::fallback(function() {
         return 'This is a custom error page';
     });
+
+// ---------------------------------------------------------------
+    Route::get('/signup', [UserController::class, 'signUp']);
+
+    Route::get('/company/{id?}', [CompanyController::class, 'company'])->name('company');
+
+
+    // [
+    //     1 => [
+    //         'company_name' => 'Inventive Media',
+    //         'position' => 'Software Developer',
+    //         'tenure' => '2020-01-15 - 2022-06-30'
+    //     ],
+    //     1 => [
+    //         'company_name' => 'Inventive Media',
+    //         'position' => 'Software Developer',
+    //         'tenure' => '2020-01-12 - 2022-06-30'
+    //     ],
+    // ]
