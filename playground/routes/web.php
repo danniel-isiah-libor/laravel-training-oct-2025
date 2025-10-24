@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Controllers\KeiController;
+use GuzzleHttp\Psr7\Request;
+use Illuminate\Http\Request as HttpRequest;
+use Illuminate\Routing\Route as RoutingRoute;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,10 +36,10 @@ Route::get('/user', function () {
 
 //Prefix or grouping of routes
 Route::prefix('/customer')->name('user.')->group(function () {
-    Route::get('/profile/{id?}', function ($id = null) {
-    return 'User Profile Page for User ID:'.$id; //Dynamic Parameters with Fallback Value
-})->name('profile');
-
+    Route::get('/profile/{id?}', [KeiController::class, 'profile'])
+    ->where ('id', '[0-9]+')
+    ->name('profile');
+    
     Route::get('/dashboard', function () {
         return 'User Dashboard Page';
     })->name('dashboard');
@@ -58,6 +63,12 @@ Route::fallback(function () {
 Route::get('/user/{id}', function ($id) {
     return 'user'.$id;
 });
+
+Route::get('/signup', [KeiController::class, 'signup']);
+
+//dd($request->name); //dd is user for debugging, purpose is to dump and die the output
+
+
 
 
 

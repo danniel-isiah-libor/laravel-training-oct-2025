@@ -40,5 +40,24 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'password' => 'hashed',
     ];
+
+    /*public static function getData()
+    {
+        return (object)[
+            'name' => 'Kei',
+            'email' => 'kei@gmail.com',
+        ]
+    }
+
+    public static function worker()
+    {
+        return (object)[
+                'company_name' => 'Inventive Media',
+                'position' => 'Software Developer',
+            ]
+
+
+}*/
 }
