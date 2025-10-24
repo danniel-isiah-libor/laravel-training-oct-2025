@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\WorkExperienceController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Laravel\Prompts\Concerns\Fallback;
@@ -26,10 +28,10 @@ Route::get('/e', fn() => '<script>alert("TEST");</script>');
 Route::get('/f', fn() => '<script>alert("TEST");</script>');
 
 // using prefix
-Route::prefix('/user')->name('user.')->group(function () {
-    Route::get('/dashboard', fn() => 'dashboard')->name('dashboard');
-    Route::get('/test2', fn() => 'settings')->name('setting');
-});
+// Route::prefix('/user')->name('user.')->group(function () {
+//     Route::get('/dashboard', fn() => 'dashboard')->name('dashboard');
+//     Route::get('/test2', fn() => 'settings')->name('setting');
+// });
 
 //Using redirect
 Route::get('/from', fn() => redirect()->route('user.dashboard'));
@@ -39,14 +41,14 @@ Route::fallback(fn() => 'FALLBACK');
 
 
 // Using dynamic routes
-Route::prefix('/dynamic')->name('dynamic')->group(function () {
+// Route::prefix('/dynamic')->name('dynamic')->group(function () {
 
-    Route::get('/required/{id}', fn(int $id) => "this is required: $id")->name('required');
+//     Route::get('/required/{id}', fn(int $id) => "this is required: $id")->name('required');
 
-    Route::get('/optional1/{name?}', fn(?string $name = null) => "This is optional1: $name")->name('optional1');
+//     Route::get('/optional1/{name?}', fn(?string $name = null) => "This is optional1: $name")->name('optional1');
 
-    Route::get('/optional2/{name?}', fn(?string $name = null) => "This is optional1: $name")->name('optional2');
-});
+//     Route::get('/optional2/{name?}', fn(?string $name = null) => "This is optional1: $name")->name('optional2');
+// });
 
 
 
@@ -87,18 +89,29 @@ Route::prefix('/dynamic')->name('dynamic')->group(function () {
 
 
 //// Using Request
-// get query values
-Route::get('signup', fn(Request $request) => dd($request->query()));
-// get post values
-Route::get('signup', fn(Request $request) => dd($request->request()));
-// get all values
-Route::get('signup', fn(Request $request) => dd($request->all()));
-// get specific values
-Route::get('signup', fn(Request $request) => dd($request->name));
+//// get query values
+// Route::get('signup', fn(Request $request) => dd($request->query()));
+// // get post values
+// Route::get('signup', fn(Request $request) => dd($request->request()));
+// // get all values
+// Route::get('signup', fn(Request $request) => dd($request->all()));
+// // get specific values
+// Route::get('signup', fn(Request $request) => dd($request->name));
 
 
+// Using controller
+// Route::get('signup', [UserController::class, 'signup']);
 
 
+Route::prefix('/user')->name('user.')->group(function () {
+    Route::get('/profile/{id?}', [UserController::class, 'profile'])
+        ->where('id', '[0-9]+')
+        ->name('profile');
+});
+
+
+//ACTIVITY
+Route::get('work_experience/{id?}', [WorkExperienceController::class, 'work_experience']);
 
 
 // ========================== Explore =============================\\

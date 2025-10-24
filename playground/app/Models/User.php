@@ -45,4 +45,13 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public static function getData()
+    {
+        return (object)[
+            'name' => 'john doe',
+            'email' => 'john.doe@example.com',
+        ];
+        // return self::where('email', '=', request()->email)->first();
+    }
 }
