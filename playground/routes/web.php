@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WorkExperienceController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -45,21 +46,4 @@ Route::fallback(function () {
 Route::get('/signup', [UserController::class, 'signUp']); // new way
 // Route::get('/signup', 'UserController@signUp'); // old way
 
-
-/**
- *
- * [
- *  1 => [
- *     'company_name' => 'Inventive Media',
- *     'position' => 'Software Developer',
- *     'tenure' => '2020-01-15 - 2022-06-30',
- *  ],
- *
- *  2 => [
- *     'company_name' => 'Inventive Media',
- *     'position' => 'Software Developer',
- *     'tenure' => '2020-01-15 - 2022-06-30',
- *  ],
- * ]
- *
- */
+Route::get('/work-experiences/{id?}', [WorkExperienceController::class, 'show']);
