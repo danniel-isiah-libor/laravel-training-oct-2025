@@ -7,10 +7,12 @@
         </div>
 
         <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form action="#" method="POST" class="space-y-6">
-                <x-input-field label="Email" type="email" />
+            <form action="{{ route('user.login') }}" method="POST" class="space-y-6">
+                @csrf
 
-                <x-input-field label="Password" type="password" />
+                <x-input-field label="Email" type="email" name="email" />
+
+                <x-input-field label="Password" type="password" name="password" />
 
                 <x-button label="Login" />
             </form>

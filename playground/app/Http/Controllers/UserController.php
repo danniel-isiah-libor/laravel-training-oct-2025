@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\User\LoginRequest;
 use App\Http\Requests\User\StoreRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules\Password;
 
 class UserController extends Controller
@@ -27,6 +29,38 @@ class UserController extends Controller
     {
         $validatedForm = $request->validated();
 
-        dd($validatedForm);
+        // option 1:
+        User::create($validatedForm);
+
+        // option 2:
+        // $user = new User();
+        // $user->name = $validatedForm['name'];
+        // $user->email = $validatedForm['email'];
+        // $user->password = $validatedForm['password'];
+        // $user->save();
+
+        // option 3:
+        // User::insert([
+        //     [
+        //         'name' => $validatedForm['name'],
+        //         'email' => $validatedForm['email'],
+        //         'password' => $validatedForm['password'],
+        //     ],
+        //     $validatedForm,
+        // ]);
+
+        return redirect()->route('login');
+    }
+
+    public function login(LoginRequest $request)
+    {
+        $validatedForm = $request->validated();
+
+        $user = new User();
+        $user->email = $validatedForm['email'];
+
+        Auth::login($user);
+
+        dd(Auth::user()); // auth()->user()
     }
 }

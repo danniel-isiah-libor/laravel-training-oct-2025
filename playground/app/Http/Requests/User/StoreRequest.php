@@ -23,10 +23,10 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => [
-                'required',
-                'integer',
-            ],
+            // 'user_id' => [
+            //     'required',
+            //     'integer',
+            // ],
             'name' => [
                 'required',
                 'string',
@@ -44,13 +44,13 @@ class StoreRequest extends FormRequest
                 // 'min:8',
                 // 'max:12',
                 'confirmed',
-                Password::min(8)
-                    ->max(12)
-                    ->symbols()
-                    ->mixedCase()
-                    ->numbers()
-                    ->letters()
-                    ->uncompromised()
+                // Password::min(8)
+                //     ->max(12)
+                //     ->symbols()
+                //     ->mixedCase()
+                //     ->numbers()
+                //     ->letters()
+                //     ->uncompromised()
             ]
         ];
     }
@@ -64,10 +64,12 @@ class StoreRequest extends FormRequest
 
     protected function prepareForValidation()
     {
-        $id = 1; // from session...
+        // $id = session('user_id'); // from session...
 
-        $this->merge([
-            'user_id' => $id,
-        ]);
+        // session()->put('user_id', 1);
+
+        // $this->merge([
+        //     'user_id' => $id,
+        // ]);
     }
 }
