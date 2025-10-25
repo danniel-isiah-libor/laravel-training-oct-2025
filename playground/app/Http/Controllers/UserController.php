@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\User\LoginRequest;
 use App\Http\Requests\User\StoreRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -44,5 +45,27 @@ class UserController extends Controller
         // $user->save();
 
         return "User registered successfully: " . $user->name;
+    }
+
+    public function login(LoginRequest $request)
+    {
+        // dd($request->all());
+
+        // Validate the incoming request data
+        // Tip: horizontal validation rules are easier to read
+        $validatedData = $request->validated();
+
+        // dd($validatedData);
+
+        if (!$validatedData) {
+            return redirect()->back()->withErrors($validatedData)->withInput();
+        }
+
+        $user = new User();
+        $user->email = $validatedData['email'];
+        $user->password = bcrypt($validatedData['password']);
+        // $user->save();
+
+        return "User Logged in successfully: " . $user->email;
     }
 }

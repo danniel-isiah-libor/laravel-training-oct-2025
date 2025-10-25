@@ -57,3 +57,4 @@ Route::view('/register', 'register')->name('register');
 Route::view('/login', 'login')->name('login');
 
 Route::post('/register', [UserController::class, 'store'])->name('user.store');
+Route::post('/login', [UserController::class, 'login'])->name('user.login');
