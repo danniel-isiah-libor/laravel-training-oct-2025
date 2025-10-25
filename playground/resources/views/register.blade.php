@@ -1,33 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
+<x-layout title="Register">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Document</title>
-    </head>
+    <x-slot:header>
+        <div>
+            Header
+        </div>
+    </x-slot:header>
 
-    <body>
+    <x-slot:footer>
+        <div>
+            Footer
+        </div>
+    </x-slot:footer>
+
+    <div>
         <h1>Register</h1>
 
-        <x-input-field label="Name" />
+        <x-alert label="Quote" />
+
+        <x-input-field label="Name" type="text" color="green" style="border: 1px solid blue" />
 
         <br>
 
-        <x-input-field label="Email" />
+        <x-input-field label="Email" type="email" />
 
         <br>
 
-        <x-input-field label="Password" />
+        <x-input-field label="Password" type="password" />
 
         <br>
 
-        <x-input-field label="Confirm Password" />
+        <x-input-field label="Confirm Password" type="password" />
 
         <br>
 
-        <button type="submit">Register</button>
-    </body>
-
-</html>
+        <x-button label="Register" />
+    </div>
+</x-layout>

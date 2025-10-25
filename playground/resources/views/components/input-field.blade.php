@@ -1,4 +1,4 @@
-@props(['label'])
+@props(['label', 'type', 'color' => 'red', 'style' => ''])
 
-<label>{{ $label }}:</label>
-<input type="text">
+<label style="{{ $style }}">{{ $label }}:</label>
+<input type="{{ $type }}">

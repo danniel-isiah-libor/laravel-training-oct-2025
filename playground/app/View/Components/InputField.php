@@ -8,14 +8,17 @@ use Illuminate\View\Component;
 
 class InputField extends Component
 {
-    private $label;
+    private $label, $type, $color, $style;
 
     /**
      * Create a new component instance.
      */
-    public function __construct($label)
+    public function __construct($label, $type, $color = null, $style = null)
     {
         $this->label = $label;
+        $this->type = $type;
+        $this->color = $color;
+        $this->style = $style;
     }
 
     /**
@@ -25,6 +28,9 @@ class InputField extends Component
     {
         return view('components.input-field', [
             'label' => $this->label,
+            'type' => $this->type,
+            'color' => $this->color,
+            'style' => $this->style,
         ]);
     }
 }
