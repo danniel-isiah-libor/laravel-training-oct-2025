@@ -1,10 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
-
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome')->name('index');
@@ -20,7 +18,10 @@ Route::prefix('user')->name('user.')->group(function () {
 
     Route::get('/settings', [UserController::class, 'userSetting'])->name('settings');
 
-    Route::get('/regex/{name}', [UserController::class,'regexName'])->where('name', '[A-Za-z]+')->name('regex');
+    Route::get('/regex/{name}', [UserController::class, 'regexName'])->where('name', '[A-Za-z]+')->name('regex');
+    Route::post('/register', [UserController::class, 'store'])->name('store');
+    Route::post('/login', [UserController::class, 'login'])->name('login');
+    Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 });
 
 Route::fallback(function () {
@@ -30,7 +31,11 @@ Route::fallback(function () {
 
 Route::get('/signup', [UserController::class, 'signUp']);
 
-
-Route::get('/companies',[CompanyController::class,'companyInfo']);
+// Route::get('/companies',[CompanyController::class,'companyInfo']);
 
 Route::get('/work-experience/{id?}', [CompanyController::class, 'workExperience']);
+
+Route::view('/register', 'register')->name('register');
+Route::view('/login', 'login')->name('login');
+
+Route::view('/dashboard', 'welcome')->name('dashboard');

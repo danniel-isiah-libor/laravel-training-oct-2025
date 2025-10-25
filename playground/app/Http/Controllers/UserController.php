@@ -1,10 +1,15 @@
 <?php
 namespace App\Http\Controllers;
-use App\Models\User;
-use Illuminate\Http\Request;
 
+use App\Http\Requests\User\LoginRequest;
+use App\Http\Requests\User\StoreRequest;
+use App\Models\User;
+use Illuminate\Auth\Events\Validated;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
+
 {
     public function signUp(Request $request)
     {
@@ -30,5 +35,38 @@ class UserController extends Controller
     {
         $user = User::getData();
         return $user();
+    }
+
+    public function store(StoreRequest $request)
+    {
+        $validatedForm = $request->validated();
+
+        User::create($validatedForm);
+
+        // User::create(
+        //     [
+        //         'name'=>validatedForm['name'],
+        //         'email'=>validatedForm['email'],
+        //         'password'=>validatedForm['password']
+        //     ]
+        // );
+
+
+        // User::insert([
+        //     $validatedForm
+        // ]);
+
+        return redirect()->route('login');
+    }
+
+    public function login(LoginRequest $request)
+    {
+        $validated = $request->validated();
+
+        $user = new User();
+        $user->email = $validated['email'];
+
+        Auth::login($user);
+        redirect()->route('dashboard');
     }
 }
