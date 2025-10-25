@@ -3,6 +3,7 @@
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WorkExperienceController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -42,3 +43,23 @@ Route::fallback(function () {
 Route::get('/signup', [UserController::class, 'signUp']);
 
 Route::get('/work_experience/{id?}', [WorkExperienceController::class, 'show']);
+
+// Route::get('/register', function () {
+//     return view('register');
+// });
+
+Route::view('/register', 'register')->name('register');
+Route::view('/login', 'login')->name('login');
+
+Route::post('/register', [UserController::class, 'store'])->name('user.store');
+Route::post('/login', [UserController::class, 'login'])->name('user.login');
+
+Route::view('/dashboard', 'dashboard')->name('dashboard');
+
+Route::post('/logout', function() {
+
+    Auth::logout();
+    return redirect()->route('login');
+
+})->name('user.logout');
+
