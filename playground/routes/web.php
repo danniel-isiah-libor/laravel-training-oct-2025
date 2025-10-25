@@ -53,4 +53,5 @@ Route::get('/work-experiences/{id?}', [WorkExperienceController::class, 'show'])
 //     return view('register');
 // });
 
-Route::view('/register', 'register');
+Route::view('/register', 'register')->name('register');
+Route::view('/login', 'login')->name('login');
