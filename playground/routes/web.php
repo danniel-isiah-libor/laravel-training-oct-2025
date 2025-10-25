@@ -47,3 +47,10 @@ Route::get('/signup', [UserController::class, 'signUp']); // new way
 // Route::get('/signup', 'UserController@signUp'); // old way
 
 Route::get('/work-experiences/{id?}', [WorkExperienceController::class, 'show']);
+
+// Route::get('/register', function () {
+//     // logic ....
+//     return view('register');
+// });
+
+Route::view('/register', 'register');
