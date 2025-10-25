@@ -6,6 +6,7 @@ use App\Http\Requests\User\LoginRequest;
 use App\Http\Requests\User\StoreRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules\Password;
 
 class UserController extends Controller
@@ -32,40 +33,42 @@ class UserController extends Controller
         // Tip: horizontal validation rules are easier to read
         $validatedData = $request->validated();
 
-        dd($validatedData);
-
-        if (!$validatedData) {
-            return redirect()->back()->withErrors($validatedData)->withInput();
-        }
-
-        $user = new User();
-        $user->name = $validatedData['name'];
-        $user->email = $validatedData['email'];
-        $user->password = bcrypt($validatedData['password']);
-        // $user->save();
-
-        return "User registered successfully: " . $user->name;
-    }
-
-    public function login(LoginRequest $request)
-    {
-        // dd($request->all());
-
-        // Validate the incoming request data
-        // Tip: horizontal validation rules are easier to read
-        $validatedData = $request->validated();
-
         // dd($validatedData);
 
         if (!$validatedData) {
             return redirect()->back()->withErrors($validatedData)->withInput();
         }
 
-        $user = new User();
-        $user->email = $validatedData['email'];
-        $user->password = bcrypt($validatedData['password']);
-        // $user->save();
+        User::create($validatedData);
 
-        return "User Logged in successfully: " . $user->email;
+        return redirect()->route('login')->with('success', 'User registered successfully.');
+
+        // $user = new User();
+        // $user->name = $validatedData['name'];
+        // $user->email = $validatedData['email'];
+        // $user->password = bcrypt($validatedData['password']);
+        // $user->save();
+    }
+
+    public function login(LoginRequest $request)
+    {
+        $validatedData = $request->validated();
+
+        if (!$validatedData) {
+            return redirect()->back()->withErrors($validatedData)->withInput();
+        }
+
+        return redirect()->route('user.dashboard')->with('success', 'User logged in successfully.');
+
+        // $user = new User();
+        // $user->email = $validatedData['email'];
+        // Auth::attempt($validatedData);
+
+        // return "User Logged in successfully: " . $validatedData['email'];
+    }
+
+    public function dashboard()
+    {
+        return "User Dashboard Page <br> <a href='" . route('user.logout') . "'>Logout</a>";
     }
 }
