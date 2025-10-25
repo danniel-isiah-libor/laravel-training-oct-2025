@@ -116,7 +116,20 @@ Route::get('/', fn() =>  view('welcome'))->name('welcome');
 // ========================== Discussed DAY-2 =============================\\
 
 //Shortcut to view without controller
-Route::view('/register', 'register')->name('register');
+Route::view('/register', 'register')->name('register.view');
+Route::post('/register', [UserController::class, 'store'])->name('register.store');
+
+
+
+Route::view('/login', 'login')->name('login.view');
+Route::post('/login', [UserController::class, 'login'])->name('login.store');
+
+Route::get('/logout', function () {
+    auth()->logout();
+    Auth::logout();
+    return redirect()->route('login.view');
+});
+
 
 
 

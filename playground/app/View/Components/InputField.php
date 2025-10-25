@@ -15,13 +15,15 @@ class InputField extends Component
     private $label;
     private $name;
     private $type;
+    private $required;
 
 
-    public function __construct($label,$name,$type)
+    public function __construct($label,$name,$type,$required)
     {
         $this->label = $label;
         $this->name = $name;
         $this->type = $type;
+        $this->required = $required;
     }
 
     /**
@@ -32,7 +34,8 @@ class InputField extends Component
         return view('components.input-field',[
             'label' => $this->label,
             'name' => $this->name,
-            'type' => $this->type
+            'type' => $this->type,
+            'required' => $this->required
         ]);
     }
 }
