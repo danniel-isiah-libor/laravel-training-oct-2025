@@ -14,18 +14,18 @@ use Laravel\Prompts\Concerns\Fallback;
 Route::get('/', fn() =>  view('welcome'))->name('welcome');
 
 
-// ========================== Discussed =============================\\
-Route::get('/a', fn() => 1234);
+// ========================== Discussed DAY-1=============================\\
+// Route::get('/a', fn() => 1234);
 
-Route::get('/b', fn() => dd('TEST'));
+// Route::get('/b', fn() => dd('TEST'));
 
-Route::get('/c', fn() => '<h1 style="background-color:red">TEST</h1>');
+// Route::get('/c', fn() => '<h1 style="background-color:red">TEST</h1>');
 
-Route::get('/d', fn() => 'TEST');
+// Route::get('/d', fn() => 'TEST');
 
-Route::get('/e', fn() => '<script>alert("TEST");</script>');
+// Route::get('/e', fn() => '<script>alert("TEST");</script>');
 
-Route::get('/f', fn() => '<script>alert("TEST");</script>');
+// Route::get('/f', fn() => '<script>alert("TEST");</script>');
 
 // using prefix
 // Route::prefix('/user')->name('user.')->group(function () {
@@ -34,10 +34,10 @@ Route::get('/f', fn() => '<script>alert("TEST");</script>');
 // });
 
 //Using redirect
-Route::get('/from', fn() => redirect()->route('user.dashboard'));
+// Route::get('/from', fn() => redirect()->route('user.dashboard'));
 
 // Using Fallback
-Route::fallback(fn() => 'FALLBACK');
+// Route::fallback(fn() => 'FALLBACK');
 
 
 // Using dynamic routes
@@ -102,25 +102,31 @@ Route::fallback(fn() => 'FALLBACK');
 // Using controller
 // Route::get('signup', [UserController::class, 'signup']);
 
-
-Route::prefix('/user')->name('user.')->group(function () {
-    Route::get('/profile/{id?}', [UserController::class, 'profile'])
-        ->where('id', '[0-9]+')
-        ->name('profile');
-});
+// Route::prefix('/user')->name('user.')->group(function () {
+//     Route::get('/profile/{id?}', [UserController::class, 'profile'])
+//         ->where('id', '[0-9]+')
+//         ->name('profile');
+// });
 
 
 //ACTIVITY
-Route::get('work_experience/{id?}', [WorkExperienceController::class, 'work_experience']);
+// Route::get('work_experience/{id?}', [WorkExperienceController::class, 'work_experience']);
+
+
+// ========================== Discussed DAY-2 =============================\\
+
+//Shortcut to view without controller
+Route::view('/register', 'register')->name('register');
+
 
 
 // ========================== Explore =============================\\
-Route::prefix('/test')->name('test.')->group(function () {
+// Route::prefix('/test')->name('test.')->group(function () {
 
-    Route::get('/sample', fn() => 'sample')->name('sample');
+//     Route::get('/sample', fn() => 'sample')->name('sample');
 
-    Route::prefix('/sample')->name('sample.')->group(function () {
-        Route::get('/test1', fn() => 'test1')->name('test1');
-        Route::get('/test2', fn() => 'test2')->name('test2');
-    });
-});
+//     Route::prefix('/sample')->name('sample.')->group(function () {
+//         Route::get('/test1', fn() => 'test1')->name('test1');
+//         Route::get('/test2', fn() => 'test2')->name('test2');
+//     });
+// });
