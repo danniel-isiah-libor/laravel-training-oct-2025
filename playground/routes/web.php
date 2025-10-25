@@ -55,3 +55,5 @@ Route::get('/work-experiences/{id?}', [WorkExperienceController::class, 'show'])
 
 Route::view('/register', 'register')->name('register');
 Route::view('/login', 'login')->name('login');
+
+Route::post('/register', [UserController::class, 'store'])->name('user.store');

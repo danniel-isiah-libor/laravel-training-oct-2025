@@ -20,15 +20,16 @@
         </div>
 
         <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form action="#" method="POST" class="space-y-6">
+            <form action="{{ route('user.store') }}" method="POST" class="space-y-6">
+                @csrf
 
-                <x-input-field label="Name" type="text" />
+                <x-input-field label="Name" type="text" name="name" />
 
-                <x-input-field label="Email" type="email" />
+                <x-input-field label="Email" type="email" name="email" />
 
-                <x-input-field label="Password" type="password" />
+                <x-input-field label="Password" type="text" name="password" />
 
-                <x-input-field label="Confirm Password" type="password" />
+                <x-input-field label="Confirm Password" type="text" name="password_confirmation" />
 
                 <x-button label="Register" />
             </form>

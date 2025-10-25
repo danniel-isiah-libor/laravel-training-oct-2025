@@ -8,7 +8,6 @@
 
         <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
             <form action="#" method="POST" class="space-y-6">
-
                 <x-input-field label="Email" type="email" />
 
                 <x-input-field label="Password" type="password" />

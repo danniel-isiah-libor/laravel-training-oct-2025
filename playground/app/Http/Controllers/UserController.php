@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\User\StoreRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rules\Password;
 
 class UserController extends Controller
 {
@@ -19,5 +21,12 @@ class UserController extends Controller
         $user = User::getData();
 
         return 'User Profile Page: ' . $user->name;
+    }
+
+    public function store(StoreRequest $request)
+    {
+        $validatedForm = $request->validated();
+
+        dd($validatedForm);
     }
 }
